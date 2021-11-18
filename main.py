@@ -70,8 +70,7 @@ def get_average_salary_hh(text, city):
         response = requests.get(url, params=payload, headers=headers)
         vacancies = response.json()['items']
         for vacancy in vacancies:
-            salary = predict_rub_salary_hh(vacancy)
-            if salary:
+            if salary := predict_rub_salary_hh(vacancy):
                 vacancies_processed += 1
                 salary_sum += salary
         pages = response.json()['pages']
@@ -107,8 +106,7 @@ def get_average_salary_sj(text, town, secret_key):
         response = requests.get(url, params=payload, headers=headers)
         vacancies = response.json()['objects']
         for vacancy in vacancies:
-            salary = predict_rub_salary_sj(vacancy)
-            if salary:
+            if salary := predict_rub_salary_sj(vacancy):
                 vacancies_processed += 1
                 salary_sum += salary
         more = response.json()['more']
@@ -134,13 +132,13 @@ if __name__ == '__main__':
     city = 'Moscow'
     result = {}
     for lang in LANGS:
-        vacancies_found = get_vacancies_count_hh(lang, CITIES[city]['area_id'])
-        average_salary, vacancies_processed = get_average_salary_hh(lang, CITIES[city]['area_id'])
+        vacancies_found = get_vacancies_count_hh(lang,
+                                                 area_id := CITIES[city]['area_id'])
+        average_salary, vacancies_processed = get_average_salary_hh(lang, area_id)
         result[lang] = {'vacancies_found': vacancies_found,
                         'vacancies_processed': vacancies_processed,
                         'average_salary': average_salary}
-    title = f'HeadHunter {city}'
-    print_table(result, title)
+    print_table(result, f'HeadHunter {city}')
 
     env = Env()
     env.read_env()
@@ -148,10 +146,13 @@ if __name__ == '__main__':
 
     result = {}
     for lang in LANGS:
-        vacancies_found = get_vacancies_count_sj(lang, CITIES[city]['town_id'], secret_key)
-        average_salary, vacancies_processed = get_average_salary_sj(lang, CITIES[city]['town_id'], secret_key)
+        vacancies_found = get_vacancies_count_sj(lang,
+                                                 town_id := CITIES[city]['town_id'],
+                                                 secret_key)
+        average_salary, vacancies_processed = get_average_salary_sj(lang,
+                                                                    town_id,
+                                                                    secret_key)
         result[lang] = {'vacancies_found': vacancies_found,
                         'vacancies_processed': vacancies_processed,
                         'average_salary': average_salary}
-    title = f'SuperJob {city}'
-    print_table(result, title)
+    print_table(result, f'SuperJob {city}')
