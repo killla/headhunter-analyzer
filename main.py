@@ -113,7 +113,6 @@ def get_average_salary_sj(text, town, secret_key):
                 salary_sum += salary
         more = response.json()['more']
         page += 1
-        sleep(0.5)
     average_salary = salary_sum // vacancies_processed
     return int(average_salary), vacancies_processed
 
