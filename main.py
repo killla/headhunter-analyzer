@@ -76,7 +76,6 @@ def get_average_salary_hh(text, city):
                 salary_sum += salary
         pages = response.json()['pages']
         page += 1
-        print(page, pages)
 
     average_salary = salary_sum // vacancies_processed
     return int(average_salary), vacancies_processed
@@ -123,11 +122,8 @@ def print_table(langs_data, title):
     table_data = [
         ['Язык программирования', 'Найдено вакансий', 'Обработано вакансий', 'Средняя зарплата, ₽']
     ]
-    for lang in langs_data:
-        table_line = [lang,
-                      langs_data[lang]['vacancies_found'],
-                      langs_data[lang]['vacancies_processed'],
-                      langs_data[lang]['average_salary']]
+    for lang, lang_data in langs_data.items():
+        table_line = [lang, *lang_data.values()]
         table_data.append(table_line)
 
     table_instance = AsciiTable(table_data, title)
