@@ -1,20 +1,15 @@
-from time import sleep
-
 import requests
 from environs import Env
 from terminaltables import AsciiTable
 
 
 def predict_salary(salary_from, salary_to):
-    match salary_from, salary_to:
-        case 0 | None, 0 | None:
-            return
-        case 0 | None, salary:
-            return salary*0.8
-        case salary, 0 | None:
-            return salary*1.2
-        case _:
-            return (salary_from + salary_to) // 2
+    if salary_from and salary_to:
+        return (salary_from + salary_to) // 2
+    elif salary_from:
+        return salary_from * 1.2
+    elif salary_to:
+        return salary_to*0.8
 
 
 def predict_rub_salary_hh(vacancy):

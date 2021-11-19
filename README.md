@@ -10,7 +10,7 @@
 
 `SUPERJOB_SECRET_KEY` - токен для API SuperJob
 
-Python 3.10 должен быть уже установлен. 
+Python 3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, если есть конфликт с Python2) для установки зависимостей:
 ```
 pip install -r requirements.txt
