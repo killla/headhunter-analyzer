@@ -4,20 +4,6 @@ import requests
 from environs import Env
 from terminaltables import AsciiTable
 
-LANGS = ['JavaScript',
-         'Java',
-         'Python',
-         'Ruby',
-         'PHP',
-         'C++',
-         'C#',
-         'Go',
-         'Scala',
-         'TypeScript']
-
-CITIES = {'Moscow': {'area_id': 1,
-                     'town_id': 4}}
-
 
 def predict_salary(salary_from, salary_to):
     match salary_from, salary_to:
@@ -129,11 +115,25 @@ def print_table(langs_data, title):
 
 
 if __name__ == '__main__':
+    langs = ['JavaScript',
+             'Java',
+             'Python',
+             'Ruby',
+             'PHP',
+             'C++',
+             'C#',
+             'Go',
+             'Scala',
+             'TypeScript']
+
+    cities = {'Moscow': {'area_id': 1,
+                         'town_id': 4}}
+
     city = 'Moscow'
     result = {}
-    for lang in LANGS:
+    for lang in langs:
         vacancies_found = get_vacancies_count_hh(lang,
-                                                 area_id := CITIES[city]['area_id'])
+                                                 area_id := cities[city]['area_id'])
         average_salary, vacancies_processed = get_average_salary_hh(lang, area_id)
         result[lang] = {'vacancies_found': vacancies_found,
                         'vacancies_processed': vacancies_processed,
@@ -145,9 +145,9 @@ if __name__ == '__main__':
     secret_key = env.str('SUPERJOB_SECRET_KEY')
 
     result = {}
-    for lang in LANGS:
+    for lang in langs:
         vacancies_found = get_vacancies_count_sj(lang,
-                                                 town_id := CITIES[city]['town_id'],
+                                                 town_id := cities[city]['town_id'],
                                                  secret_key)
         average_salary, vacancies_processed = get_average_salary_sj(lang,
                                                                     town_id,
