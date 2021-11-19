@@ -9,7 +9,7 @@ def predict_salary(salary_from, salary_to):
     elif salary_from:
         return salary_from * 1.2
     elif salary_to:
-        return salary_to*0.8
+        return salary_to * 0.8
 
 
 def predict_rub_salary_hh(vacancy):
@@ -119,8 +119,8 @@ if __name__ == '__main__':
     result = {}
     for lang in langs:
         vacancies_with_salary, vacancies_processed, average_salary = get_average_salary_sj(lang,
-                                                                    town_id,
-                                                                    secret_key)
+                                                                                           town_id,
+                                                                                           secret_key)
         result[lang] = {'vacancies_found': vacancies_with_salary,
                         'vacancies_processed': vacancies_processed,
                         'average_salary': average_salary}
