@@ -77,7 +77,7 @@ def get_average_salary_sj(text, town, secret_key, profession=48):
     return vacancies_found, vacancies_processed, average_salary
 
 
-def print_table(langs_data, title):
+def get_table(langs_data, title):
     table_data = [
         ['Язык программирования', 'Найдено вакансий', 'Обработано вакансий', 'Средняя зарплата, ₽']
     ]
@@ -86,8 +86,7 @@ def print_table(langs_data, title):
         table_data.append(table_line)
 
     table_instance = AsciiTable(table_data, title)
-    print(table_instance.table)
-    print()
+    return table_instance.table
 
 
 if __name__ == '__main__':
@@ -110,7 +109,8 @@ if __name__ == '__main__':
         result[lang] = {'vacancies_found': vacancies_with_salary,
                         'vacancies_processed': vacancies_processed,
                         'average_salary': average_salary}
-    print_table(result, f'HeadHunter {city}')
+    print(get_table(result, f'HeadHunter {city}'))
+    print()
 
     env = Env()
     env.read_env()
@@ -124,4 +124,4 @@ if __name__ == '__main__':
         result[lang] = {'vacancies_found': vacancies_with_salary,
                         'vacancies_processed': vacancies_processed,
                         'average_salary': average_salary}
-    print_table(result, f'SuperJob {city}')
+    print(get_table(result, f'SuperJob {city}'))
