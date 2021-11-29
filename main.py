@@ -113,8 +113,8 @@ if __name__ == '__main__':
         vacancies_found, vacancies_processed, average_salary = \
             get_average_salary_hh(lang, area_id)
         hh_salaries[lang] = {'vacancies_found': vacancies_found,
-                        'vacancies_processed': vacancies_processed,
-                        'average_salary': average_salary}
+                             'vacancies_processed': vacancies_processed,
+                             'average_salary': average_salary}
     print(get_table(hh_salaries, f'HeadHunter {city}'))
     print()
 
@@ -127,6 +127,6 @@ if __name__ == '__main__':
         vacancies_found, vacancies_processed, average_salary = \
             get_average_salary_sj(lang, town_id, secret_key)
         sj_salaries[lang] = {'vacancies_found': vacancies_found,
-                        'vacancies_processed': vacancies_processed,
-                        'average_salary': average_salary}
+                             'vacancies_processed': vacancies_processed,
+                             'average_salary': average_salary}
     print(get_table(sj_salaries, f'SuperJob {city}'))
