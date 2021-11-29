@@ -13,7 +13,7 @@ def predict_salary(salary_from, salary_to):
 
 
 def predict_rub_salary_hh(vacancy):
-    if vacancy['salary']['currency'] == 'RUR':
+    if vacancy['salary'] and vacancy['salary']['currency'] == 'RUR':
         return predict_salary(vacancy['salary']['from'], vacancy['salary']['to'])
 
 
@@ -23,9 +23,6 @@ def predict_rub_salary_sj(vacancy):
 
 
 def get_average_salary_hh(text, city, profession=96):
-    """
-    return only vacancies with salary, not all vacancies
-    """
     vacancies_processed, salary_sum = 0, 0
     page, pages = 0, 1
     url = 'https://api.hh.ru/vacancies'
@@ -33,7 +30,6 @@ def get_average_salary_hh(text, city, profession=96):
     payload = {'area': city,
                'professional_role': profession,
                'period': 30,
-               'only_with_salary': True,
                'per_page': 100,
                'text': text, }
 
@@ -54,9 +50,6 @@ def get_average_salary_hh(text, city, profession=96):
 
 
 def get_average_salary_sj(text, town, secret_key, profession=48):
-    """
-    return only vacancies with salary, not all vacancies
-    """
     vacancies_processed, salary_sum, page = 0, 0, 0
     count_per_page = 100
     url = 'https://api.superjob.ru/2.2/vacancies'
@@ -64,7 +57,6 @@ def get_average_salary_sj(text, town, secret_key, profession=48):
     payload = {'town': town,
                'catalogues': profession,
                'count': count_per_page,
-               'no_agreement': 1,
                'keyword': text}
     more = True
     while more:
