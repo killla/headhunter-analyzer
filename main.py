@@ -84,14 +84,14 @@ def get_average_salary_sj(text, town, secret_key, profession=48):
 
 
 def get_table(langs_data, title):
-    table_data = [
+    table_lines = [
         ['Язык программирования', 'Найдено вакансий', 'Обработано вакансий', 'Средняя зарплата, ₽']
     ]
     for lang, lang_data in langs_data.items():
         table_line = [lang, *lang_data.values()]
-        table_data.append(table_line)
+        table_lines.append(table_line)
 
-    table_instance = AsciiTable(table_data, title)
+    table_instance = AsciiTable(table_lines, title)
     return table_instance.table
 
 
